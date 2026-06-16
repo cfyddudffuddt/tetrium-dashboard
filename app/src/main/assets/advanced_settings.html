@@ -1,0 +1,346 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>MOTION_CTRL_v1.0 | Settings &amp; Communication</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#424754",
+                        "surface": "#131313",
+                        "surface-tint": "#adc6ff",
+                        "inverse-primary": "#005ac2",
+                        "error-container": "#93000a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "background": "#131313",
+                        "on-surface": "#e5e2e1",
+                        "outline": "#8c909f",
+                        "surface-dim": "#131313",
+                        "primary": "#adc6ff",
+                        "tertiary-fixed-dim": "#ffb3ad",
+                        "secondary-fixed": "#6dfe9c",
+                        "error": "#ffb4ab",
+                        "on-tertiary": "#68000a",
+                        "on-tertiary-fixed": "#410004",
+                        "on-error-container": "#ffdad6",
+                        "inverse-surface": "#e5e2e1",
+                        "secondary-fixed-dim": "#4de082",
+                        "on-secondary-fixed-variant": "#005227",
+                        "on-tertiary-container": "#5c0008",
+                        "surface-bright": "#393939",
+                        "primary-fixed": "#d8e2ff",
+                        "inverse-on-surface": "#313030",
+                        "on-secondary-fixed": "#00210c",
+                        "on-background": "#e5e2e1",
+                        "on-primary-container": "#00285d",
+                        "surface-variant": "#353535",
+                        "secondary-container": "#00b55d",
+                        "on-primary": "#002e6a",
+                        "surface-variant": "#353535",
+                        "secondary-container": "#00b55d",
+                        "on-primary": "#002e6a",
+                        "surface-container-high": "#2a2a2a",
+                        "tertiary-fixed": "#ffdad7",
+                        "surface-container-highest": "#353535",
+                        "surface-container": "#20201f",
+                        "on-tertiary-fixed-variant": "#930013",
+                        "primary-container": "#4d8eff",
+                        "surface-container-low": "#1c1b1b",
+                        "on-error": "#690005",
+                        "on-primary-fixed-variant": "#004395",
+                        "on-primary-fixed": "#001a42",
+                        "secondary": "#4de082",
+                        "on-secondary-container": "#003e1c",
+                        "on-secondary": "#003919",
+                        "tertiary": "#ffb3ad",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-surface-variant": "#c2c6d6",
+                        "tertiary-container": "#ff5451"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "container-padding": "16px",
+                        "xl": "32px",
+                        "md": "16px",
+                        "sm": "12px",
+                        "base": "4px",
+                        "xs": "8px",
+                        "gutter": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "data-lg": ["JetBrains Mono"],
+                        "body-md": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "data-sm": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "display-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "data-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "data-sm": ["14px", {"lineHeight": "20px", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0A;
+            color: #e5e2e1;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-panel {
+            background: rgba(26, 26, 26, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .active-glow {
+            box-shadow: 0 0 15px rgba(173, 198, 255, 0.2);
+        }
+        .scroll-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .motor-toggle:checked ~ .toggle-bg {
+            background-color: #00b55d;
+        }
+        .motor-toggle:checked ~ .toggle-dot {
+            transform: translateX(100%);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden pb-24" style="opacity: 1; transition: opacity 0.5s ease-out;">
+<!-- TopAppBar Component -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-surface border-b border-outline-variant/30 flex justify-between items-center px-md py-sm">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">precision_manufacturing</span>
+<h1 class="font-headline-md text-headline-md font-bold tracking-tighter text-primary">MOTION_CTRL_v1.0</h1>
+</div>
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant hover:bg-white/5 transition-colors duration-200 cursor-pointer p-xs rounded-full">sensors</span>
+</div>
+</header>
+<main class="mt-20 px-container-padding max-w-5xl mx-auto space-y-md">
+<!-- Welcome / Context Header -->
+<section>
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface">Configuration Terminal</h2>
+<p class="text-on-surface-variant opacity-70">Station 04-Alpha | Precision Motor Control Units</p>
+</section>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-md">
+<!-- Column 1: Core Settings (Bento Style) -->
+<div class="md:col-span-7 space-y-md">
+<!-- Expandable Settings Panel -->
+<div class="glass-panel rounded-xl overflow-hidden active-glow">
+<button class="w-full flex items-center justify-between p-md hover:bg-white/5 transition-all" onclick="toggleSection('settings-content')">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">tune</span>
+<span class="font-headline-md text-headline-md uppercase tracking-wider">Advanced Motor Config</span>
+</div>
+<span class="material-symbols-outlined transition-transform duration-300" id="settings-chevron">expand_more</span>
+</button>
+<div class="p-md pt-0 space-y-lg" id="settings-content">
+<!-- Inputs Grid -->
+<div class="grid grid-cols-2 gap-md">
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-outline">Acceleration</label>
+<div class="relative">
+<input class="w-full bg-[#0F0F0F] border border-outline-variant/30 rounded-lg p-md font-data-sm text-data-sm text-primary focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" type="text" value="800">
+<span class="absolute right-md top-1/2 -translate-y-1/2 font-data-sm text-data-sm opacity-50">Steps/S²</span>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-outline">Deceleration</label>
+<div class="relative">
+<input class="w-full bg-[#0F0F0F] border border-outline-variant/30 rounded-lg p-md font-data-sm text-data-sm text-primary focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" type="text" value="800">
+<span class="absolute right-md top-1/2 -translate-y-1/2 font-data-sm text-data-sm opacity-50">Steps/S²</span>
+</div>
+</div>
+</div>
+<!-- Dropdown & Toggle -->
+<div class="flex flex-col md:flex-row gap-md justify-between items-start md:items-center">
+<div class="w-full md:w-1/2 space-y-xs">
+<label class="font-label-caps text-label-caps text-outline">Microstepping</label>
+<select class="w-full bg-[#0F0F0F] border border-outline-variant/30 rounded-lg p-md font-data-sm text-data-sm text-on-surface appearance-none focus:border-primary outline-none">
+<option>Full Step</option>
+<option>Half Step</option>
+<option>1/4 Step</option>
+<option>1/8 Step</option>
+<option selected="">1/16 Step</option>
+</select>
+</div>
+<div class="flex items-center gap-md w-full md:w-auto p-md bg-surface-container-low rounded-xl border border-white/5">
+<span class="font-body-md text-body-md">Motor Enable</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only motor-toggle" type="checkbox">
+<div class="w-11 h-6 bg-outline-variant rounded-full transition-colors toggle-bg"></div>
+<div class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform toggle-dot"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Preset Positions List -->
+<div class="glass-panel rounded-xl p-md">
+<h3 class="font-label-caps text-label-caps text-outline mb-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">ads_click</span> PRESET POSITIONS
+                    </h3>
+<div class="space-y-xs">
+<!-- Preset Row -->
+<div class="flex justify-between items-center p-md bg-[#0F0F0F] rounded-lg border border-outline-variant/10 hover:border-primary/50 transition-all cursor-pointer group">
+<span class="font-body-md text-body-md">Home Position</span>
+<div class="flex items-center gap-md">
+<span class="font-data-sm text-data-sm text-secondary">0 Steps</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">play_circle</span>
+</div>
+</div>
+<div class="flex justify-between items-center p-md bg-[#0F0F0F] rounded-lg border border-outline-variant/10 hover:border-primary/50 transition-all cursor-pointer group">
+<span class="font-body-md text-body-md">Pick-Up Station</span>
+<div class="flex items-center gap-md">
+<span class="font-data-sm text-data-sm text-secondary">1000 Steps</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">play_circle</span>
+</div>
+</div>
+<div class="flex justify-between items-center p-md bg-[#0F0F0F] rounded-lg border border-outline-variant/10 hover:border-primary/50 transition-all cursor-pointer group">
+<span class="font-body-md text-body-md">Alignment Beta</span>
+<div class="flex items-center gap-md">
+<span class="font-data-sm text-data-sm text-secondary">4250 Steps</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">play_circle</span>
+</div>
+</div>
+<div class="flex justify-between items-center p-md bg-[#0F0F0F] rounded-lg border border-outline-variant/10 hover:border-primary/50 transition-all cursor-pointer group">
+<span class="font-body-md text-body-md">Safe Eject</span>
+<div class="flex items-center gap-md">
+<span class="font-data-sm text-data-sm text-secondary">6800 Steps</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">play_circle</span>
+</div>
+</div>
+<div class="flex justify-between items-center p-md bg-[#0F0F0F] rounded-lg border border-outline-variant/10 hover:border-primary/50 transition-all cursor-pointer group">
+<span class="font-body-md text-body-md">Max Travel Extent</span>
+<div class="flex items-center gap-md">
+<span class="font-data-sm text-data-sm text-secondary">12000 Steps</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">play_circle</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column 2: Communication & System -->
+<div class="md:col-span-5 space-y-md">
+<!-- Bluetooth Section -->
+<div class="glass-panel rounded-xl p-md"><div class="flex justify-between items-start mb-md"><div><h3 class="font-label-caps text-label-caps text-outline">Bluetooth Communication</h3><div class="mt-xs space-y-xs"><label class="font-label-caps text-[10px] text-outline opacity-50 uppercase">Active Module</label><select class="w-full bg-[#0F0F0F] border border-outline-variant/30 rounded-lg p-xs font-data-sm text-data-sm text-primary focus:border-primary outline-none appearance-none"><option selected="">ESP32 Motion Controller</option><option>HC-05 Serial Module</option></select></div></div><div class="flex flex-col items-end gap-xs"><span class="bg-secondary/20 text-secondary px-xs py-1 rounded font-label-caps text-[10px] animate-pulse">CONNECTED</span><span class="text-[10px] text-outline font-data-sm">v2.4.1-stable</span></div></div><div class="space-y-sm"><div class="flex gap-sm"><button class="flex-1 py-xs rounded-lg border border-outline-variant/50 hover:bg-white/5 transition-all font-label-caps text-label-caps">SCAN</button><button class="flex-1 py-xs rounded-lg bg-surface-container-high border border-outline-variant/50 hover:bg-white/10 transition-all font-label-caps text-label-caps">CONNECT</button></div><button class="w-full py-xs rounded-lg border border-error/30 text-error hover:bg-error/10 transition-all font-label-caps text-label-caps">DISCONNECT</button></div></div>
+<!-- Wi-Fi Config -->
+<div class="glass-panel rounded-xl p-md space-y-md">
+<h3 class="font-label-caps text-label-caps text-outline">Network Diagnostics</h3>
+<div class="grid grid-cols-2 gap-sm">
+<div class="p-sm bg-surface-container-lowest rounded-lg border border-white/5">
+<p class="text-[10px] text-outline opacity-50 uppercase">Local IP</p>
+<p class="font-data-sm text-data-sm text-on-surface">192.168.4.1</p>
+</div>
+<div class="p-sm bg-surface-container-lowest rounded-lg border border-white/5">
+<p class="text-[10px] text-outline opacity-50 uppercase">Signal</p>
+<p class="font-data-sm text-data-sm text-secondary">Excellent</p>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-xs p-sm bg-primary/10 border border-primary/20 text-primary rounded-lg hover:bg-primary/20 transition-all font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[18px]">lan</span> UPDATE NETWORK CONFIG
+                    </button>
+</div>
+<!-- About Section -->
+<div class="p-md border border-outline-variant/10 rounded-xl bg-gradient-to-br from-surface to-[#0D0D0D] flex flex-col items-center text-center space-y-sm">
+<div class="w-12 h-12 rounded-full bg-primary/5 flex items-center justify-center border border-primary/20">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">info</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md tracking-tighter">MOTION_CTRL System</h4>
+<p class="text-on-surface-variant italic opacity-60 text-sm">"Intelligence in Every Movement"</p>
+<p class="font-data-sm text-[11px] text-outline mt-xs">CORE FIRMWARE VERSION 1.0.42</p>
+</div>
+</div>
+<!-- Visual Element: Animation Placeholder -->
+<div class="rounded-xl h-32 overflow-hidden relative border border-white/5">
+
+<div class="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+<p class="font-label-caps text-label-caps tracking-widest text-primary/80">SYSTEM TELEMETRY ACTIVE</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar Component -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe bg-surface-container backdrop-blur-xl border-t border-white/10 shadow-lg md:hidden">
+<button class="flex flex-col items-center justify-center text-outline dark:text-outline px-4 py-1 hover:text-on-surface transition-all active:scale-95 duration-100">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</button>
+<button class="flex flex-col items-center justify-center text-outline dark:text-outline px-4 py-1 hover:text-on-surface transition-all active:scale-95 duration-100">
+<span class="material-symbols-outlined">settings_input_component</span>
+<span class="font-label-caps text-label-caps">Control</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary dark:text-secondary bg-secondary-container/10 rounded-xl px-4 py-1 active:scale-95 duration-100">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</button>
+<button class="flex flex-col items-center justify-center text-outline dark:text-outline px-4 py-1 hover:text-on-surface transition-all active:scale-95 duration-100">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-caps text-label-caps">Logs</span>
+</button>
+</nav>
+<!-- Desktop Navigation SideDrawer Simulation -->
+<aside class="hidden md:flex fixed right-md top-1/2 -translate-y-1/2 flex-col gap-md glass-panel p-xs rounded-2xl border-white/10 shadow-2xl">
+<div class="p-sm text-primary hover:bg-white/5 rounded-xl cursor-pointer transition-all" title="System Calibration">
+<span class="material-symbols-outlined">tune</span>
+</div>
+<div class="p-sm text-on-surface-variant hover:bg-white/5 rounded-xl cursor-pointer transition-all" title="Motor Profiles">
+<span class="material-symbols-outlined">memory</span>
+</div>
+<div class="p-sm text-on-surface-variant hover:bg-white/5 rounded-xl cursor-pointer transition-all" title="Network Config">
+<span class="material-symbols-outlined">lan</span>
+</div>
+<div class="p-sm text-on-surface-variant hover:bg-white/5 rounded-xl cursor-pointer transition-all" title="Diagnostics">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+</aside>
+<script>
+        function toggleSection(id) {
+            const content = document.getElementById(id);
+            const chevron = document.getElementById('settings-chevron');
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                chevron.style.transform = 'rotate(0deg)';
+            } else {
+                content.classList.add('hidden');
+                chevron.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Initialize view
+        document.addEventListener('DOMContentLoaded', () => {
+            // Smooth reveal
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease-out';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+
+
+    <script src="app_bridge.js"></script>
+</body></html>

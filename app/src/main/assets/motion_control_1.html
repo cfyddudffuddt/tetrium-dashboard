@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>MOTION_CTRL_v1.0 | Control Panel</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --glass-bg: rgba(26, 26, 26, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+        body {
+            background-color: #0A0A0A;
+            color: #e5e2e1;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+        }
+        .industrial-shadow {
+            box-shadow: 0px 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            15% { transform: scale(1.02); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.02); }
+        }
+        .e-stop-heartbeat {
+            animation: heartbeat 2s infinite;
+        }
+
+        .e-stop-active {
+            box-shadow: inset 0 4px 10px rgba(0,0,0,0.8), 0 0 20px rgba(255, 0, 0, 0.3);
+            transform: translateY(2px) !important;
+            animation: none !important;
+        }
+        
+        @keyframes thumb-glow {
+            0%, 100% { box-shadow: 0 0 5px rgba(173, 198, 255, 0.5); }
+            50% { box-shadow: 0 0 15px rgba(173, 198, 255, 0.9); }
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #adc6ff;
+            cursor: pointer;
+            border: 2px solid #002e6a;
+            animation: thumb-glow 2s infinite;
+        }
+        .status-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .4; }
+        }
+        /* Custom scrollbar for telemetry logs if needed */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #424754; border-radius: 10px; }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#424754",
+                    "surface": "#131313",
+                    "surface-tint": "#adc6ff",
+                    "inverse-primary": "#005ac2",
+                    "error-container": "#93000a",
+                    "surface-container-lowest": "#0e0e0e",
+                    "background": "#131313",
+                    "on-surface": "#e5e2e1",
+                    "outline": "#8c909f",
+                    "surface-dim": "#131313",
+                    "primary": "#adc6ff",
+                    "tertiary-fixed-dim": "#ffb3ad",
+                    "secondary-fixed": "#6dfe9c",
+                    "error": "#ffb4ab",
+                    "on-tertiary": "#68000a",
+                    "on-tertiary-fixed": "#410004",
+                    "on-error-container": "#ffdad6",
+                    "inverse-surface": "#e5e2e1",
+                    "secondary-fixed-dim": "#4de082",
+                    "on-secondary-fixed-variant": "#005227",
+                    "on-tertiary-container": "#5c0008",
+                    "surface-bright": "#393939",
+                    "primary-fixed": "#d8e2ff",
+                    "inverse-on-surface": "#313030",
+                    "on-secondary-fixed": "#00210c",
+                    "on-background": "#e5e2e1",
+                    "on-primary-container": "#00285d",
+                    "surface-variant": "#353535",
+                    "secondary-container": "#00b55d",
+                    "on-primary": "#002e6a",
+                    "surface-variant": "#353535",
+                    "secondary-container": "#00b55d",
+                    "on-primary": "#002e6a",
+                    "surface-container-high": "#2a2a2a",
+                    "tertiary-fixed": "#ffdad7",
+                    "surface-container-highest": "#353535",
+                    "surface-container": "#20201f",
+                    "on-tertiary-fixed-variant": "#930013",
+                    "primary-container": "#4d8eff",
+                    "surface-container-low": "#1c1b1b",
+                    "on-error": "#690005",
+                    "on-primary-fixed-variant": "#004395",
+                    "on-primary-fixed": "#001a42",
+                    "secondary": "#4de082",
+                    "on-secondary-container": "#003e1c",
+                    "on-secondary": "#003919",
+                    "tertiary": "#ffb3ad",
+                    "primary-fixed-dim": "#adc6ff",
+                    "on-surface-variant": "#c2c6d6",
+                    "tertiary-container": "#ff5451"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "24px",
+                    "container-padding": "16px",
+                    "xl": "32px",
+                    "md": "16px",
+                    "sm": "12px",
+                    "base": "4px",
+                    "xs": "8px",
+                    "gutter": "12px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "data-lg": ["JetBrains Mono"],
+                    "body-md": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "data-sm": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "data-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "data-sm": ["14px", {"lineHeight": "20px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface text-primary dark:text-primary docked full-width top-0 border-b border-outline-variant/30 flat no shadows transition-colors duration-200 flex justify-between items-center w-full px-md py-sm z-50">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">precision_manufacturing</span>
+<h1 class="font-headline-md text-headline-md font-bold tracking-tighter text-primary dark:text-primary">MOTION_CTRL_v1.0</h1>
+</div>
+<div class="flex items-center gap-md">
+<div class="flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-secondary status-pulse"></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">SYSTEM ONLINE</span>
+</div>
+<span class="material-symbols-outlined text-primary">sensors</span>
+</div>
+</header>
+<main class="flex-grow pb-32 pt-8 px-container-padding max-w-5xl mx-auto w-full">
+<!-- Dashboard Header -->
+<div class="mb-lg flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface">Axis Controller</h2>
+<p class="font-body-md text-body-md text-outline">Active Station: 04-Alpha | V.2.4.1</p>
+</div>
+<!-- Live Analytics (Compact) -->
+<div class="grid grid-cols-2 md:flex gap-xs">
+<div class="glass-panel rounded-xl px-sm py-xs flex flex-col min-w-[100px]">
+<span class="font-label-caps text-label-caps text-outline">ACCEL</span>
+<span class="font-data-sm text-data-sm text-primary">800 <span class="text-[10px]">steps/s²</span></span>
+</div>
+<div class="glass-panel rounded-xl px-sm py-xs flex flex-col min-w-[100px]">
+<span class="font-label-caps text-label-caps text-outline">DECEL</span>
+<span class="font-data-sm text-data-sm text-primary">800 <span class="text-[10px]">steps/s²</span></span>
+</div>
+<div class="glass-panel rounded-xl px-sm py-xs flex flex-col min-w-[100px]">
+<span class="font-label-caps text-label-caps text-outline">RUNTIME</span>
+<span class="font-data-sm text-data-sm text-secondary" id="runtime">00:01:35</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Motion Control Card (Left/Main Column) -->
+<section class="lg:col-span-7 flex flex-col gap-lg">
+<div class="glass-panel rounded-xl p-lg industrial-shadow">
+<div class="flex items-center justify-between mb-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">settings_input_component</span>
+                            Configuration
+                        </h3>
+<span class="font-label-caps text-label-caps px-xs py-1 rounded bg-primary/10 text-primary border border-primary/20">READY</span>
+</div>
+<div class="space-y-xl">
+<!-- Numeric Input: Target Steps -->
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-outline block">TARGET STEPS</label>
+<div class="relative">
+<input class="w-full bg-[#0F0F0F] border border-outline-variant/30 rounded-lg p-md font-data-lg text-data-lg text-primary focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="Enter steps..." type="number" value="2500"/>
+<span class="absolute right-md top-1/2 -translate-y-1/2 font-label-caps text-label-caps text-outline">STP</span>
+</div>
+</div>
+<!-- Slider: Speed Control -->
+<div class="space-y-xs">
+<div class="flex justify-between items-center">
+<label class="font-label-caps text-label-caps text-outline">SPEED CONTROL</label>
+<span class="font-data-sm text-data-sm text-primary" id="speed-val">1200 steps/sec</span>
+</div>
+<input class="w-full h-2 bg-surface-variant rounded-full appearance-none cursor-pointer accent-primary" max="5000" min="100" oninput="document.getElementById('speed-val').innerText = this.value + ' steps/sec'" step="50" type="range" value="1200"/>
+<div class="flex justify-between font-label-caps text-[10px] text-outline px-1">
+<span>MIN (100)</span>
+<span>MAX (5000)</span>
+</div>
+</div>
+<!-- Direction Toggle -->
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-outline">ORIENTATION</label>
+<div class="grid grid-cols-2 gap-md">
+<button class="flex flex-col items-center justify-center py-lg rounded-xl border-2 transition-all bg-primary/20 border-primary text-primary hover:-translate-y-1 hover:shadow-lg" onclick="toggleDir(this)">
+<span class="font-headline-md text-headline-md">CW</span>
+<span class="font-label-caps text-label-caps opacity-70">Clockwise</span>
+</button>
+<button class="flex flex-col items-center justify-center py-lg rounded-xl border-2 border-outline-variant/30 text-outline hover:border-outline transition-all hover:-translate-y-1 hover:shadow-lg" onclick="toggleDir(this)">
+<span class="font-headline-md text-headline-md">CCW</span>
+<span class="font-label-caps text-label-caps opacity-70">Counter-Clockwise</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Command Center & Real-time Feed (Right Column) -->
+<aside class="lg:col-span-5 space-y-lg">
+<!-- Command Buttons Grid -->
+<div class="glass-panel rounded-xl p-lg industrial-shadow">
+<h3 class="font-label-caps text-label-caps text-outline mb-md">COMMAND CENTER</h3>
+<div class="grid grid-cols-2 gap-sm">
+<!-- START -->
+<button class="col-span-2 h-16 rounded-xl bg-secondary-container text-on-secondary-container font-headline-md text-headline-md flex items-center justify-center gap-xs active:scale-95 transition-all hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(0,181,93,0.3)] hover:brightness-110">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                            START
+                        </button>
+<!-- PAUSE / RESUME -->
+<button class="h-14 rounded-xl bg-tertiary-container text-on-tertiary-container font-label-caps text-label-caps flex items-center justify-center gap-xs active:scale-95 transition-all hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(255,84,81,0.3)] hover:brightness-110">
+<span class="material-symbols-outlined">pause</span>
+                            PAUSE
+                        </button>
+<button class="h-14 rounded-xl bg-primary-container text-on-primary-container font-label-caps text-label-caps flex items-center justify-center gap-xs active:scale-95 transition-all hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(77,142,255,0.3)] hover:brightness-110">
+<span class="material-symbols-outlined">resume</span>
+                            RESUME
+                        </button>
+<!-- STOP / HOME -->
+<button class="h-14 rounded-xl bg-error-container text-on-error-container font-label-caps text-label-caps flex items-center justify-center gap-xs active:scale-95 transition-all hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(147,0,10,0.3)] hover:brightness-110">
+<span class="material-symbols-outlined">stop</span>
+                            STOP
+                        </button>
+<button class="h-14 rounded-xl bg-surface-variant text-on-surface-variant font-label-caps text-label-caps flex items-center justify-center gap-xs active:scale-95 transition-all hover:-translate-y-1 hover:shadow-lg hover:brightness-110">
+<span class="material-symbols-outlined">home</span>
+                            HOME
+                        </button>
+</div>
+</div>
+<!-- Telemetry Visualizer -->
+<div class="glass-panel rounded-xl overflow-hidden aspect-square relative border border-white/5">
+<div class="absolute inset-0 z-0">
+<!-- STITCH_THREEJS_START:ANIMATION_9 class="w-full h-full bg-transparent" -->
+<div class="w-full h-full bg-transparent" style="display:block;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_9" style="width:100%;height:100%"></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_9');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  const scene = new THREE.Scene();
+const containerWidth = container.clientWidth || window.innerWidth;
+const containerHeight = container.clientHeight || window.innerHeight;
+const camera = new THREE.PerspectiveCamera(75, containerWidth / containerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+renderer.setSize(containerWidth, containerHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
+container.appendChild(renderer.domElement);
+
+// Group to hold the entire motor assembly
+const motorGroup = new THREE.Group();
+scene.add(motorGroup);
+
+// Materials based on Tetrium Motion Control Design System
+const bodyMaterial = new THREE.MeshPhongMaterial({ color: 0x333333, shininess: 100 });
+const accentMaterial = new THREE.MeshPhongMaterial({ color: 0x3b82f6, shininess: 80 }); // Primary Blue
+const shaftMaterial = new THREE.MeshStandardMaterial({ color: 0xcccccc, metalness: 0.8, roughness: 0.2 });
+const wireMaterial = new THREE.MeshLambertMaterial({ color: 0x111111 });
+
+// Motor Body (NEMA 17 style)
+const bodyGeom = new THREE.BoxGeometry(2, 2, 2);
+const body = new THREE.Mesh(bodyGeom, bodyMaterial);
+motorGroup.add(body);
+
+// Front plate
+const plateGeom = new THREE.BoxGeometry(2.1, 2.1, 0.2);
+const plate = new THREE.Mesh(plateGeom, bodyMaterial);
+plate.position.z = 1;
+motorGroup.add(plate);
+
+// Shaft
+const shaftGeom = new THREE.CylinderGeometry(0.2, 0.2, 1.5, 32);
+const shaft = new THREE.Mesh(shaftGeom, shaftMaterial);
+shaft.rotation.x = Math.PI / 2;
+shaft.position.z = 1.5;
+motorGroup.add(shaft);
+
+// Shaft Flat (D-cut)
+const flatGeom = new THREE.BoxGeometry(0.3, 0.1, 1);
+const flat = new THREE.Mesh(flatGeom, shaftMaterial);
+flat.position.set(0, 0.15, 1.5);
+motorGroup.add(flat);
+
+// Back Connector/Wires
+const connectorGeom = new THREE.BoxGeometry(0.8, 0.4, 0.4);
+const connector = new THREE.Mesh(connectorGeom, bodyMaterial);
+connector.position.set(0, -0.8, -1);
+motorGroup.add(connector);
+
+// Lighting
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+scene.add(ambientLight);
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+directionalLight.position.set(5, 5, 5);
+scene.add(directionalLight);
+
+const blueLight = new THREE.PointLight(0x3b82f6, 1, 10);
+blueLight.position.set(-2, 2, 2);
+scene.add(blueLight);
+
+camera.position.z = 5;
+camera.position.y = 1;
+camera.lookAt(0, 0, 0);
+
+// Animation loop
+function animate() {
+    requestAnimationFrame(animate);
+    
+    // Smooth idle rotation
+    motorGroup.rotation.y += 0.005;
+    motorGroup.rotation.x = Math.sin(Date.now() * 0.001) * 0.1;
+    
+    // Simulate shaft spinning
+    shaft.rotation.y += 0.05;
+    flat.rotation.y += 0.05;
+
+    renderer.render(scene, camera);
+}
+
+// Handle resize
+window.addEventListener('resize', () => {
+    const w = container.clientWidth || window.innerWidth;
+    const h = container.clientHeight || window.innerHeight;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+});
+
+animate();
+})();
+</script>
+</div>
+<!-- STITCH_THREEJS_END:ANIMATION_9 -->
+</div>
+<div class="absolute bottom-md left-md z-10">
+<span class="font-label-caps text-[10px] text-primary/60">LIVE TELEMETRY FEED</span>
+<div class="font-data-lg text-data-lg text-primary">POS: +0248.00</div>
+</div>
+<div class="absolute top-md right-md z-10 flex gap-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Emergency Stop: Massive Button -->
+<div class="fixed bottom-0 left-0 w-full p-md bg-background z-[60] border-t border-outline-variant/20 flex flex-col md:flex-row gap-md items-center">
+<button class="w-full bg-error-container text-white py-lg rounded-xl flex items-center justify-center gap-md industrial-shadow transition-all group e-stop-heartbeat hover:brightness-110 active:e-stop-active" id="e-stop" onclick="this.classList.toggle('e-stop-active'); this.classList.toggle('e-stop-heartbeat')">
+<span class="material-symbols-outlined text-[32px] transition-transform" style="font-variation-settings: 'FILL' 1;">emergency_home</span>
+<span class="font-display-lg-mobile tracking-widest">EMERGENCY STOP</span>
+</button>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-24 left-4 right-4 bg-surface-container backdrop-blur-xl border border-white/10 shadow-lg rounded-xl z-50 flex justify-around items-center px-4 py-2 pb-safe">
+<button class="flex flex-col items-center justify-center text-secondary dark:text-secondary bg-secondary-container/10 rounded-xl px-4 py-1">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</button>
+<button class="flex flex-col items-center justify-center text-outline dark:text-outline px-4 py-1 hover:text-on-surface transition-all">
+<span class="material-symbols-outlined">settings_input_component</span>
+<span class="font-label-caps text-label-caps">Control</span>
+</button>
+<button class="flex flex-col items-center justify-center text-outline dark:text-outline px-4 py-1 hover:text-on-surface transition-all">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-caps text-label-caps">Logs</span>
+</button>
+<button class="flex flex-col items-center justify-center text-outline dark:text-outline px-4 py-1 hover:text-on-surface transition-all">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</button>
+</nav>
+<script>
+        function toggleDir(btn) {
+            // Find parent and sibling buttons
+            const parent = btn.parentElement;
+            const buttons = parent.querySelectorAll('button');
+            
+            buttons.forEach(b => {
+                b.classList.remove('bg-primary/20', 'border-primary', 'text-primary');
+                b.classList.add('border-outline-variant/30', 'text-outline');
+            });
+            
+            btn.classList.add('bg-primary/20', 'border-primary', 'text-primary');
+            btn.classList.remove('border-outline-variant/30', 'text-outline');
+        }
+
+        // Simulating micro-telemetry updates
+        // This is handled and cleared by app_bridge.js now to use real data
+    </script>
+    <script src="app_bridge.js"></script>
+</body></html>

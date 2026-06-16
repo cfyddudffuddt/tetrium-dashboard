@@ -1,0 +1,416 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Projects | Tetrium Technologies</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#3f465c",
+                        "surface": "#131313",
+                        "on-secondary": "#003737",
+                        "on-surface": "#e5e2e1",
+                        "on-background": "#e5e2e1",
+                        "surface-dim": "#131313",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed-variant": "#004f4f",
+                        "outline-variant": "#3e4850",
+                        "tertiary-container": "#9ba2bb",
+                        "secondary-fixed-dim": "#00dddd",
+                        "inverse-primary": "#00658d",
+                        "on-error": "#690005",
+                        "surface-container": "#201f1f",
+                        "primary": "#82cfff",
+                        "secondary-container": "#00fbfb",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-primary": "#00344b",
+                        "secondary": "#ffffff",
+                        "on-secondary-fixed": "#002020",
+                        "on-primary-fixed": "#001e2d",
+                        "outline": "#87929b",
+                        "background": "#131313",
+                        "surface-variant": "#353534",
+                        "secondary-fixed": "#00fbfb",
+                        "primary-container": "#00aeef",
+                        "on-surface-variant": "#bdc8d1",
+                        "inverse-on-surface": "#313030",
+                        "surface-tint": "#82cfff",
+                        "tertiary-fixed-dim": "#bec6e0",
+                        "on-tertiary": "#283044",
+                        "on-secondary-container": "#007070",
+                        "surface-container-highest": "#353534",
+                        "primary-fixed-dim": "#82cfff",
+                        "on-tertiary-fixed": "#131b2e",
+                        "on-primary-fixed-variant": "#004c6b",
+                        "tertiary-fixed": "#dae2fd",
+                        "surface-bright": "#3a3939",
+                        "inverse-surface": "#e5e2e1",
+                        "on-primary-container": "#003e58",
+                        "surface-container-low": "#1c1b1b",
+                        "tertiary": "#bec6e0",
+                        "primary-fixed": "#c6e7ff",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-container": "#31394d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "md": "24px",
+                        "lg": "48px",
+                        "sm": "12px",
+                        "xl": "80px",
+                        "gutter": "24px",
+                        "xs": "4px",
+                        "margin-desktop": "64px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["JetBrains Mono"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-xl": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0A;
+            color: #e5e2e1;
+        }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(130, 207, 255, 0.1);
+        }
+        .glass-panel:hover {
+            border-color: #82cfff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+        }
+        .circuit-bg {
+            background-image: radial-gradient(#82cfff 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            opacity: 0.05;
+        }
+        .glow-text {
+            text-shadow: 0 0 10px rgba(130, 207, 255, 0.5);
+        }
+        .diamond-bullet {
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-desktop py-4 bg-on-secondary/60 backdrop-blur-xl border-b border-white/10 shadow-[0_0_20px_rgba(0,255,255,0.1)]">
+<a class="block h-12 drop-shadow-[0_0_10px_rgba(130,207,255,0.8)]" href="index.html">
+<img alt="Tetrium" class="h-full w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbcxptG6_JOHcwT4B_vbwGo8j1twFPRzGwBOviThgr0IFicoHbMd4oImYvuTwF1I0fwx8I4x3zNFKjUVVrjuqnFWeSbsfPtHnx76DClXKtu6TrbFxhS6lxA54nqDsktQEQS7YtByLgEi6wgC49H-16eq4FhzCnh-Tbvy4P5BjnBM3VMlEgRoo7qUVVQcibma9Gh_kOOR8wTfhM6wqX-y9M-sVYI0l0hYJeOilODojo7QxaffIcDHXhGR51JduvRSXG0FYnIjzuVcE">
+</a>
+<div class="hidden md:flex items-center gap-gutter">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="index.html">Home</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="about.html">About</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="services.html">Services</a>
+<a class="font-label-md text-label-md text-primary border-b-2 border-primary pb-1" href="index.html">Projects</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="index.html">Research</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="index.html">Team</a>
+</div>
+<a href="#footer-contact" class="bg-primary text-on-primary px-6 py-2 font-label-md text-label-md hover:scale-95 transition-transform active:scale-90 shadow-[0_0_15px_rgba(130,207,255,0.4)] flex items-center justify-center">Contact Us</a>
+</nav>
+<main class="relative pt-32 pb-xl">
+<div class="absolute inset-0 circuit-bg pointer-events-none"></div>
+<!-- Hero Section -->
+<section class="px-margin-desktop mb-xl relative">
+<div class="max-w-4xl">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-4 block">Archive 2024 // Project Portfolio</span>
+<h1 class="font-headline-xl text-headline-xl mb-6 leading-none">Engineering the <span class="text-primary glow-text">Automated Future</span>.</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                    Explore the technical blueprint of our latest breakthroughs in robotics, precision motion control, and autonomous navigation. Each project represents a leap toward clinical excellence.
+                </p>
+</div>
+</section>
+<!-- Projects Bento Grid -->
+<section class="px-margin-desktop grid grid-cols-12 gap-gutter">
+<!-- Featured: Smart Prosthetic Hand -->
+<div class="col-span-12 lg:col-span-8 group">
+<div class="glass-panel relative overflow-hidden h-[600px] flex flex-col justify-end p-md transition-all duration-500">
+<img alt="Smart Prosthetic Hand" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZzGN7ILH4llIgMCxZ4aMJhmMroREAELfIdw4IuDMohjH2ZLws4qUJrHFA3KG08ASVupN2H0NILJrPDC8QMhlN063XprvYf78WPPgS3mYAu8hbnoJFrhpBz7WerOWia8yKd2mRizXEdruOuzsflW5AzSIib4VepHPIuvhblbbNCnyc0pZcQg8_wli2weoPN0VXqiTIiYxFxQkoqwtVGwTAAf2CcDiON6DUbLH39nONqG4I1lidlYlftwiGx9GkTk78iuWpa0SJ8zI">
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-xs mb-4">
+<span class="w-2 h-2 bg-primary animate-pulse diamond-bullet"></span>
+<span class="font-label-sm text-label-sm text-primary">PROJECT 01: BIOMIMETIC_CONTROL</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg mb-4">Smart Prosthetic Hand</h2>
+<div class="grid grid-cols-3 gap-md border-t border-white/10 pt-md mt-md">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">DEGREES OF FREEDOM</p>
+<p class="font-headline-md text-headline-md text-primary">22</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">LATENCY</p>
+<p class="font-headline-md text-headline-md text-primary">&lt;5ms</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">MATERIAL</p>
+<p class="font-headline-md text-headline-md text-primary">Carbon T-800</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Card: Autonomous Cleaning Robot -->
+<div class="col-span-12 lg:col-span-4 group">
+<div class="glass-panel h-full flex flex-col p-md transition-all duration-500">
+<div class="relative h-64 mb-md overflow-hidden bg-surface-container-low border border-white/5">
+<img alt="Autonomous Cleaning Robot" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9fkAuoqw21xDY1mCYAyMrTjzNj0cifXkKumIyKIphXIqCRoUXMkPc56_8Q6JDRSO-YczABpnkg4Q1V7z00VafflKSI4NnewbNVivyr57sLxPVSYyP-uEwXeg24z7y1qJWkDdTmCSnY21rbqhLnZNuxfg1SBy-7DxPPZ9u06we6-qFsDgmY62IkpRaFfNwhXoCA9Suilgp7GYoDwU-kD_VOHGOgXMeSaY_RcYTG3yXV4j4X36U1n439TTxQvn4-p-sOs2UMRruvno">
+<div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="flex-grow">
+<span class="font-label-sm text-label-sm text-primary mb-2 block">PROJECT 02: NAV_HEX</span>
+<h3 class="font-headline-md text-headline-md mb-4">Autonomous Cleaning Robot</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                            A hexagonal platform featuring SLAM navigation and ultrasonic sensor arrays for high-density environments.
+                        </p>
+</div>
+<button class="w-full border border-primary/50 py-3 font-label-md text-label-md text-primary hover:bg-primary/10 transition-colors flex items-center justify-center gap-2">
+                        VIEW DATA SHEET
+                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Technical Row -->
+<!-- Quadruped Robot -->
+<div class="col-span-12 md:col-span-6 lg:col-span-4">
+<div class="glass-panel p-md h-full relative overflow-hidden group">
+<div class="absolute -right-10 -top-10 w-40 h-40 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/20 transition-all"></div>
+<span class="font-label-sm text-label-sm text-primary mb-4 block">PROJECT 04: GAIT_LAB</span>
+<h3 class="font-headline-md text-headline-md mb-6">Quadruped Robot Platform</h3>
+<div class="space-y-4 mb-8">
+<div class="flex justify-between items-center border-b border-white/5 pb-2">
+<span class="text-on-surface-variant font-label-sm">MAX PAYLOAD</span>
+<span class="text-primary font-label-md">12.5 KG</span>
+</div>
+<div class="flex justify-between items-center border-b border-white/5 pb-2">
+<span class="text-on-surface-variant font-label-sm">STABILITY SENSOR</span>
+<span class="text-primary font-label-md">IMU 9-AXIS</span>
+</div>
+<div class="flex justify-between items-center border-b border-white/5 pb-2">
+<span class="text-on-surface-variant font-label-sm">RUNTIME</span>
+<span class="text-primary font-label-md">180 MIN</span>
+</div>
+</div>
+<div class="w-full h-40 bg-surface-container-lowest border border-white/5 relative">
+<!-- Custom visualization placeholder -->
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-3/4 h-1/2 flex items-end justify-between px-4">
+<div class="w-2 bg-primary/40 h-1/2"></div>
+<div class="w-2 bg-primary/60 h-3/4 animate-pulse"></div>
+<div class="w-2 bg-primary h-full"></div>
+<div class="w-2 bg-primary/50 h-2/3"></div>
+<div class="w-2 bg-primary/30 h-1/4"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Intelligent Stepper Motor Controller -->
+<div class="col-span-12 md:col-span-6 lg:col-span-4">
+<div class="glass-panel p-md h-full flex flex-col justify-between group">
+<div>
+<span class="font-label-sm text-label-sm text-primary mb-4 block">PROJECT 03: MOTION_CORE</span>
+<h3 class="font-headline-md text-headline-md mb-6">Intelligent Stepper Motor Controller</h3>
+<div class="p-4 bg-surface-container-low border-l-2 border-primary mb-6">
+<p class="font-label-md text-label-md text-primary mb-1">SYSTEM STATUS: NOMINAL</p>
+<p class="font-body-md text-body-md text-on-surface-variant">FPGA-based precision control with real-time feedback loop integration.</p>
+</div>
+</div>
+<div class="aspect-square w-full bg-surface-container-lowest relative overflow-hidden">
+<div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_#82cfff_0%,_transparent_70%)]"></div>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<div class="w-24 h-24 border-4 border-dashed border-primary/30 rounded-full animate-spin-slow"></div>
+<span class="mt-4 font-label-sm text-label-sm text-on-surface-variant">ENCODER DATA FEED</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Military Reconnaissance Robot (Concept) -->
+<div class="col-span-12 lg:col-span-4">
+<div class="bg-primary/5 border border-primary/20 p-md h-full relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4">
+<span class="bg-primary text-on-primary font-label-sm px-2 py-1">CLASSIFIED</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary mb-4 block">PROJECT 05: STEALTH_RECON</span>
+<h3 class="font-headline-md text-headline-md mb-4">Military Reconnaissance Robot</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8">
+                        Advanced thermal camouflage and silent drivetrain development for high-stakes environmental scouting.
+                    </p>
+<div class="space-y-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 glass-panel flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">visibility</span>
+</div>
+<div>
+<p class="font-label-md text-label-md">Thermal Cloaking</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Active surface modulation</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 glass-panel flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">rss_feed</span>
+</div>
+<div>
+<p class="font-label-md text-label-md">Encrypted Mesh</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Satellite link redundant</p>
+</div>
+</div>
+</div>
+<div class="mt-12 h-20 w-full overflow-hidden opacity-30 group-hover:opacity-60 transition-opacity">
+<div class="flex gap-1 items-end h-full">
+<div class="w-1 h-[20%] bg-primary"></div><div class="w-1 h-[40%] bg-primary"></div><div class="w-1 h-[30%] bg-primary"></div><div class="w-1 h-[60%] bg-primary"></div><div class="w-1 h-[80%] bg-primary"></div><div class="w-1 h-[70%] bg-primary"></div><div class="w-1 h-[90%] bg-primary"></div><div class="w-1 h-[50%] bg-primary"></div><div class="w-1 h-[30%] bg-primary"></div><div class="w-1 h-[40%] bg-primary"></div><div class="w-1 h-[60%] bg-primary"></div><div class="w-1 h-[45%] bg-primary"></div><div class="w-1 h-[75%] bg-primary"></div><div class="w-1 h-[55%] bg-primary"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Technical Specification Section -->
+<section class="px-margin-desktop mt-xl">
+<div class="glass-panel p-lg border-primary/20">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-xl gap-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg mb-2">Core Component Standards</h2>
+<p class="text-on-surface-variant">Every project at Tetrium adheres to strict clinical engineering protocols.</p>
+</div>
+<div class="flex gap-gutter">
+<div class="text-center">
+<div class="text-headline-md font-bold text-primary">99.8%</div>
+<div class="font-label-sm text-on-surface-variant">PRECISION</div>
+</div>
+<div class="text-center">
+<div class="text-headline-md font-bold text-primary">ISO-7</div>
+<div class="font-label-sm text-on-surface-variant">FACILITY</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<div class="space-y-4">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary">memory</span>
+<span class="font-label-md text-label-md text-primary">Processing Power</span>
+</div>
+<p class="text-body-md text-on-surface-variant">Custom ARM-based neural processing units integrated into every joint and sensor hub for edge-AI processing.</p>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary">settings_input_component</span>
+<span class="font-label-md text-label-md text-primary">Modular Design</span>
+</div>
+<p class="text-body-md text-on-surface-variant">Interchangeable hardware modules allowing for rapid prototyping and field-serviceability without system downtime.</p>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary">precision_manufacturing</span>
+<span class="font-label-md text-label-md text-primary">Materials Science</span>
+</div>
+<p class="text-body-md text-on-surface-variant">Utilization of high-performance composites, including graphene-reinforced polymers and medical-grade titanium.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full px-margin-desktop py-xl grid grid-cols-1 md:grid-cols-4 gap-gutter bg-surface-container-lowest border-t border-outline-variant/30" id="footer-contact">
+<div class="col-span-1 md:col-span-1">
+<div class="h-16 mb-4">
+<img alt="Tetrium" class="h-full w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbcxptG6_JOHcwT4B_vbwGo8j1twFPRzGwBOviThgr0IFicoHbMd4oImYvuTwF1I0fwx8I4x3zNFKjUVVrjuqnFWeSbsfPtHnx76DClXKtu6TrbFxhS6lxA54nqDsktQEQS7YtByLgEi6wgC49H-16eq4FhzCnh-Tbvy4P5BjnBM3VMlEgRoo7qUVVQcibma9Gh_kOOR8wTfhM6wqX-y9M-sVYI0l0hYJeOilODojo7QxaffIcDHXhGR51JduvRSXG0FYnIjzuVcE">
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Intelligence in Every Movement.</p>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-primary mb-4">Sitemap</h4>
+<ul class="space-y-2">
+<li class=""><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary-fixed transition-colors" href="index.html">Home</a></li>
+<li class=""><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary-fixed transition-colors" href="about.html">About</a></li>
+<li class=""><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary-fixed transition-colors" href="services.html">Services</a></li>
+<li class=""><a class="font-label-sm text-label-sm text-primary font-bold" href="index.html">Projects</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-primary mb-4">Technical</h4>
+<ul class="space-y-2">
+<li class=""><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary-fixed transition-colors" href="index.html">Research</a></li>
+<li class=""><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary-fixed transition-colors" href="about.html">API Docs</a></li>
+<li class=""><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary-fixed transition-colors" href="services.html">Security</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-primary mb-4">Contact</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-2">info@tetrium.tech</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">0800-ROBOTICS</p>
+<div class="mt-4 flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">terminal</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">hub</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">biotech</span>
+</div>
+</div>
+<div class="col-span-1 md:col-span-4 pt-lg mt-lg border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-md">
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-60">© 2024 Tetrium Technologies. All Rights Reserved.</p>
+<div class="flex gap-md">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary" href="index.html">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary" href="index.html">Terms of Service</a>
+</div>
+</div>
+</footer>
+<style>
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin-slow 12s linear infinite;
+        }
+    </style>
+<script>
+        // Micro-interaction for smooth scrolling or hover effects
+        document.querySelectorAll('.glass-panel').forEach(panel => {
+            panel.addEventListener('mousemove', (e) => {
+                const rect = panel.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                panel.style.setProperty('--mouse-x', `${x}px`);
+                panel.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+
+
+
+
+</body></html>

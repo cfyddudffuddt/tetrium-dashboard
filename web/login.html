@@ -1,0 +1,304 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Tetrium Technologies - Secure Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-container": "#31394d",
+                      "on-error": "#690005",
+                      "on-surface": "#e5e2e1",
+                      "inverse-primary": "#00658d",
+                      "background": "#131313",
+                      "surface": "#131313",
+                      "surface-bright": "#3a3939",
+                      "surface-variant": "#353534",
+                      "inverse-on-surface": "#313030",
+                      "on-secondary-fixed-variant": "#004f4f",
+                      "surface-container-low": "#1c1b1b",
+                      "primary-container": "#00aeef",
+                      "on-background": "#e5e2e1",
+                      "surface-container-high": "#2a2a2a",
+                      "primary": "#82cfff",
+                      "tertiary-fixed": "#dae2fd",
+                      "on-secondary": "#003737",
+                      "tertiary": "#bec6e0",
+                      "on-tertiary": "#283044",
+                      "surface-tint": "#82cfff",
+                      "primary-fixed": "#c6e7ff",
+                      "on-tertiary-fixed": "#131b2e",
+                      "on-secondary-fixed": "#002020",
+                      "secondary-fixed-dim": "#00dddd",
+                      "outline-variant": "#3e4850",
+                      "on-primary": "#00344b",
+                      "on-surface-variant": "#bdc8d1",
+                      "outline": "#87929b",
+                      "on-tertiary-fixed-variant": "#3f465c",
+                      "primary-fixed-dim": "#82cfff",
+                      "on-primary-fixed-variant": "#004c6b",
+                      "error-container": "#93000a",
+                      "inverse-surface": "#e5e2e1",
+                      "surface-dim": "#131313",
+                      "surface-container-highest": "#353534",
+                      "secondary-container": "#00fbfb",
+                      "surface-container-lowest": "#0e0e0e",
+                      "tertiary-container": "#9ba2bb",
+                      "secondary-fixed": "#00fbfb",
+                      "on-primary-container": "#003e58",
+                      "error": "#ffb4ab",
+                      "on-secondary-container": "#007070",
+                      "on-primary-fixed": "#001e2d",
+                      "tertiary-fixed-dim": "#bec6e0",
+                      "secondary": "#ffffff",
+                      "surface-container": "#201f1f",
+                      "on-error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "md": "24px",
+                      "gutter": "24px",
+                      "margin-desktop": "64px",
+                      "sm": "12px",
+                      "base": "8px",
+                      "xs": "4px",
+                      "xl": "80px",
+                      "lg": "48px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Inter"],
+                      "label-sm": ["JetBrains Mono"],
+                      "headline-xl": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "label-md": ["JetBrains Mono"],
+                      "headline-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "body-md": ["Inter"]
+              },
+              "fontSize": {
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "500"}],
+                      "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .tech-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .input-tech {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(130, 207, 255, 0.3);
+            color: #e5e2e1;
+            transition: all 0.3s ease;
+        }
+
+        .input-tech:focus {
+            outline: none;
+            border-bottom-color: #82cfff;
+            box-shadow: 0 1px 0 0 #82cfff;
+        }
+
+        .glow-button {
+            transition: all 0.3s ease;
+        }
+        .glow-button:hover {
+            box-shadow: 0 0 15px rgba(130, 207, 255, 0.4);
+            border-color: #82cfff;
+        }
+
+        .ambient-glow {
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-[#0A0A0A] text-on-surface font-body-md min-h-screen flex items-center justify-center relative overflow-hidden tech-grid">
+<!-- Ambient Background Glows -->
+<div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl mix-blend-screen pointer-events-none"></div>
+<div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary-container/5 rounded-full blur-3xl mix-blend-screen pointer-events-none"></div>
+<!-- HUD Elements -->
+<div class="absolute top-margin-desktop left-margin-desktop hidden md:flex items-center gap-sm">
+<div class="w-2 h-2 rounded-full bg-secondary-fixed animate-pulse"></div>
+<span class="font-label-sm text-label-sm text-primary tracking-widest uppercase">System Status: Secure</span>
+</div><div class="absolute top-margin-desktop right-margin-desktop hidden md:flex items-center"><a href="index.html" class="flex items-center gap-xs font-label-sm text-label-sm text-outline-variant hover:text-primary transition-colors uppercase tracking-widest"><span class="material-symbols-outlined text-[18px]">arrow_back</span> Return to Terminal</a></div>
+<div class="absolute bottom-margin-desktop right-margin-desktop hidden md:flex flex-col items-end gap-xs text-outline-variant font-label-sm text-label-sm">
+<span class="">TETRIUM_AUTH_V4.2.1</span>
+<span class="">ENC_MODE: SHA-256</span>
+</div>
+<!-- Main Container -->
+<main class="relative z-10 w-full max-w-md px-margin-mobile md:px-0">
+<!-- Logo Header -->
+<div class="flex flex-col items-center mb-lg">
+<a href="index.html" class="block hover:opacity-80 transition-opacity"><img alt="Tetrium Logo" class="w-24 h-24 mb-md filter drop-shadow-[0_0_15px_rgba(130,207,255,0.3)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8_xc2KqX9KXzLCze5cXEGaxuddWGYFevaVcVZl5DBt9cTAKkdn5OuGvm6tw_XeXVT0n_1NEImsV3EFQwFrIpiCkrxkIQeulxK_uLGC2qqy21wqDH_5CjivRx4wTaD5-Jn7YFcWt5hb20B74UyNp5l0ZP54AwJDV3NFdHILWaIFMwEuoikK49FQ6AgQgyF8ivD7N19hHivO2zxB6F6CA02pdql9gCNDzfJaj50f4tc-cNc-xZWz8OAURDiHTTeGcMVwRHjd1cnYJA"></a>
+<h1 class="font-headline-md text-headline-md text-on-surface tracking-tight mb-xs">Secure Authorization</h1>
+<p class="font-body-md text-body-md text-on-surface-variant text-center">Verify credentials to access the central intelligence laboratory.</p>
+</div>
+<!-- Glassmorphic Login Card -->
+<div class="glass-panel rounded-xl p-md md:p-lg ambient-glow relative overflow-hidden group">
+<!-- Hover Circuit Effect -->
+<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiM4MmNmZmYiIG9wYWNpdHk9IjAuMSIvPjwvc3ZnPg==')] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"></div>
+<form id="login-form" class="relative z-10 flex flex-col gap-gutter">
+<!-- Input Group: Email -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-primary flex items-center gap-xs" for="email">
+<span class="material-symbols-outlined text-[16px]" data-icon="terminal">terminal</span>
+                        OPERATIVE ID
+                    </label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-outline-variant text-[20px]" data-icon="person">person</span>
+<input class="input-tech w-full py-sm pl-[32px] font-body-md text-body-md placeholder:text-outline-variant/50" id="email" placeholder="Enter designated email" required="" type="email">
+</div>
+</div>
+<!-- Input Group: Password -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-primary flex items-center gap-xs" for="password">
+<span class="material-symbols-outlined text-[16px]" data-icon="key">key</span>
+                        ACCESS KEY
+                    </label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-outline-variant text-[20px]" data-icon="lock">lock</span>
+<input class="input-tech w-full py-sm pl-[32px] font-body-md text-body-md placeholder:text-outline-variant/50" id="password" placeholder="Enter security passphrase" required="" type="password">
+</div>
+<div class="flex justify-end mt-xs">
+<a class="font-label-sm text-label-sm text-outline-variant hover:text-primary transition-colors" href="index.html">Recover Key?</a>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-sm mt-sm">
+<button class="w-full bg-primary-container text-on-primary-container font-label-md text-label-md py-sm rounded-lg flex items-center justify-center gap-xs glow-button" type="submit">
+<span class="material-symbols-outlined text-[20px]" data-icon="login">login</span>
+                        INITIALIZE SESSION
+                    </button>
+<div class="relative flex items-center py-xs">
+<div class="flex-grow border-t border-outline-variant/30"></div>
+<span class="flex-shrink-0 mx-sm font-label-sm text-label-sm text-outline-variant">OR OVERRIDE</span>
+<div class="flex-grow border-t border-outline-variant/30"></div>
+</div>
+<button id="google-signin-btn" class="w-full bg-transparent border border-outline-variant/50 text-on-surface font-label-md text-label-md py-sm rounded-lg flex items-center justify-center gap-sm hover:bg-surface-variant/20 hover:border-primary transition-all" type="button">
+<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+                        AUTHENTICATE VIA GOOGLE
+                    </button>
+</div>
+</form>
+</div>
+<!-- Footer Links -->
+<div class="mt-md text-center">
+<a class="font-label-sm text-label-sm text-outline-variant hover:text-primary transition-colors" href="index.html">Request Terminal Access</a>
+</div>
+</main>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    
+    const firebaseConfig = {
+      apiKey: "AIzaSyC4qMGG9pjnQGzO_lQRAe1plFDBUj0t5lg",
+      authDomain: "tetrium-aa4b0.firebaseapp.com",
+      projectId: "tetrium-aa4b0",
+      storageBucket: "tetrium-aa4b0.firebasestorage.app",
+      messagingSenderId: "491276022047",
+      appId: "1:491276022047:web:4876ff2cd2dfb666cec02a",
+      measurementId: "G-JH3MYYZE3K"
+    };
+    
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    
+    // Auth elements
+    const loginForm = document.getElementById('login-form');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const googleBtn = document.getElementById('google-signin-btn');
+    
+    // Email/Password Login
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = emailInput.value;
+        const password = passwordInput.value;
+        
+        // Basic feedback
+        const submitBtn = loginForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<span class="material-symbols-outlined text-[20px] animate-spin">sync</span> AUTHENTICATING...';
+        submitBtn.disabled = true;
+        
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                submitBtn.innerHTML = '<span class="material-symbols-outlined text-[20px]">check_circle</span> ACCESS GRANTED';
+                setTimeout(() => { window.location.href = "index.html"; }, 1000);
+            })
+            .catch((error) => {
+                console.error(error);
+                alert("Authorization failed: " + error.message);
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            });
+    });
+    
+    // Google Sign-In
+    googleBtn.addEventListener('click', () => {
+        const provider = new GoogleAuthProvider();
+        
+        const originalText = googleBtn.innerHTML;
+        googleBtn.innerHTML = '<span class="material-symbols-outlined text-[20px] animate-spin">sync</span> AUTHENTICATING...';
+        googleBtn.disabled = true;
+        
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                googleBtn.innerHTML = '<span class="material-symbols-outlined text-[20px]">check_circle</span> ACCESS GRANTED';
+                setTimeout(() => { window.location.href = "index.html"; }, 1000);
+            })
+            .catch((error) => {
+                console.error(error);
+                alert("Google Authorization failed: " + error.message);
+                googleBtn.innerHTML = originalText;
+                googleBtn.disabled = false;
+            });
+    });
+</script>
+
+</body></html>
